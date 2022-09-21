@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/role")
 public class RoleController {
 
-
     @Autowired
     RoleService roleService;
 
-
     @PostMapping("")
-    public ResponseEntity createClient(@RequestBody RoleDto roleDto){
+    public ResponseEntity createRole(@RequestBody RoleDto roleDto){
 
         RoleModel role = roleService.save(roleDto);
 

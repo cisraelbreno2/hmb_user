@@ -1,5 +1,6 @@
 package br.com.hmb_user.service;
 
+import br.com.hmb_user.dto.RoleDto;
 import br.com.hmb_user.dto.UserDto;
 import br.com.hmb_user.model.RoleModel;
 import br.com.hmb_user.model.UserModel;
@@ -19,10 +20,17 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    RoleService roleService;
+
     public UserModel save(UserDto userDto){
         UserModel user = new UserModel();
         List<RoleModel> roles = new ArrayList<>();
         BeanUtils.copyProperties(userDto, user);
+
+        for (RoleDto dto: userDto.getRoles()) {
+            user.getRoles().add(roleService.findById(dto.getId()).get());
+        }
         BeanUtils.copyProperties(userDto.getRoles(), user.getRoles());
         return userRepository.save(user);
     }

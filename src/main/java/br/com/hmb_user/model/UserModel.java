@@ -3,6 +3,7 @@ package br.com.hmb_user.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,5 +27,9 @@ public class UserModel {
     @ManyToMany
     @JoinColumn(name = "user_role")
     private List<RoleModel> roles;
+
+    public UserModel(){
+        roles = new ArrayList<>();
+    }
 
 }
